@@ -17,9 +17,6 @@
 import webapp2
 # import simplejson as json
 from google.appengine.api import urlfetch
-from metamind.api import set_api_key, general_image_classifier
-k="tbYAbBvgQRgi9QfWRvs6NXAqcIFrp7p8ycYDctzT2duT8vlKkV"
-set_api_key(k)
 html = """
 <form action="identify" method="post">
     <input type="text" style="width:700" name = q>
@@ -32,8 +29,6 @@ class IdentifyHandler(webapp2.RequestHandler):
         url = self.request.get("q")
         result = urlfetch.fetch(url)
         if result.status_code == 200:
-            resstr = general_image_classifier.predict([url], input_type='urls')
-            self.response.write(resstr[0][u'label'])
             self.response.write("heloo")
         else:
             self.response.write("error")
